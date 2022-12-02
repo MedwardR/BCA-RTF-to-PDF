@@ -2,13 +2,18 @@ import os
 import json
 from fpdf import FPDF
 
-def appendFiles():
-    direc = os.getcwd()
-    files = os.listdir(direc)
-    files = [f for f in files if os.path.isfile(os.path.join(direc, f)) and f[0] != "."]
-    print(files)
-
-print("BCA RTF to PDF Mass Converter and Formatter")
+print("\nBCA RTF to PDF Mass Converter and Formatter")
 input("Press enter to start the operation...")
 
-appendFiles()
+direc = os.getcwd()
+files = [f for f in os.listdir(direc) if os.path.isfile(f) and f[0] != "." and os.path.splitext(f)[1].lower() == ".rtf"]
+
+i = 0
+for fileName in files:
+    i += 1
+    print("Processing file " + str(i) + "/" + str(len(files)))
+    
+    # Append text to document
+    file = open(fileName)
+    
+    file.close()
