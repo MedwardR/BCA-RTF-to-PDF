@@ -13,15 +13,21 @@ for fileName in files:
     print("Processing file " + str(i) + "/" + str(len(files)))
     
     # Append text to document
+    textToAppend = """
+### This is a placeholder line ###
+    """
+    
     file = open(fileName, "r")
     lines = file.read().split("\n")
-    lines[len(lines) - 2] = "### This is a test line ###"
+    lines[len(lines) - 2] = textToAppend
+    
     newFileContents = ""
     for line in lines:
         newFileContents += line + "\n"
     file.close()
+    
     file = open(fileName, "w")
     file.write(newFileContents)
     file.close()
 
-input("\nProcess complete!\nPress any key to exit...")
+input("\nOperation complete!\nPress any key to exit...")

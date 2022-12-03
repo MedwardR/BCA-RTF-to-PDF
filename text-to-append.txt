@@ -1,0 +1,4 @@
+This file contains the text that will be added to the end of the RTF documents when the program is run
+To apply your changes, save this file as "text-to-append.txt" and run the script "apply-text-to-append.py"
+<---------------------- Any text you wish to append should be below this line ----------------------->
+Example: The quick brown fox jumped over the lazy dog
