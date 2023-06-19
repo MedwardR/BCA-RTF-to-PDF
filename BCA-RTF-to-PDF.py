@@ -14,7 +14,7 @@ for fileName in files:
     
     # Append text to document
     textToAppend = """
-### This is a placeholder line ###
+Replace this line with your own text
     """
     
     file = open(fileName, "r")
