@@ -14,18 +14,21 @@ echo:
 echo #############################################################################
 
 echo:
-pause
-
-echo:
 set /p dirPath="###  Enter target directory path: "
 echo %dirPath% > dir.TEMP
 
 echo:
 python append_text.py
 
-del dir.TEMP
+echo:
+echo   Converting files!
 
 echo:
+docto.exe -WD -f "%dirPath%" -fx .rtf -o "%dirPath%" -t wdFormatPDF
+del *.rtf
+
+del dir.TEMP
+
 echo #############################
 echo:
 echo           Finished!

@@ -11,7 +11,7 @@ files = [f for f in os.listdir(direc) if ".rtf" in f and f[0] != "." and os.path
 i = 0
 for fileName in files:
     i += 1
-    print("  Processing file " + str(i) + "/" + str(len(files)))
+    print("  Appending text to file " + str(i) + "/" + str(len(files)))
     
     # Append text to document
     textToAppend = """
