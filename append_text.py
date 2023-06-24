@@ -2,6 +2,7 @@ import os
 
 tempDirPathFile = open("dir.TEMP", "r")
 direc = list(tempDirPathFile.read())
+tempDirPathFile.close()
 if direc[len(direc) - 1] == "\n": direc[len(direc) - 1] = ""
 if direc[len(direc) - 1] != "\\" and direc[len(direc) - 1] != "/": direc += "\\"
 if direc[len(direc) - 3] == " ": direc[len(direc) - 3] = ""

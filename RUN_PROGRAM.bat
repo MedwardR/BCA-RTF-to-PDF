@@ -21,14 +21,18 @@ echo:
 python append_text.py
 
 echo:
-echo   Converting files!
+docto.exe -WD -f "%dirPath%" -fx .rtf -o "%dirPath%" -t wdFormatPDF
+
+echo Removing old files...
+python delete_rtfs.py
 
 echo:
-docto.exe -WD -f "%dirPath%" -fx .rtf -o "%dirPath%" -t wdFormatPDF
-del *.rtf
+echo Updating table of contents...
+python table_of_contents.py
 
 del dir.TEMP
 
+echo:
 echo #############################
 echo:
 echo           Finished!
