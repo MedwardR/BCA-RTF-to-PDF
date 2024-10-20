@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.11.35312.102
+VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCA-RTF-to-PDF", "BCA-RTF-to-PDF.csproj", "{CC69864A-70D1-4E1C-ACDB-EB8281564061}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCA-RTF-to-PDF", "BCA-RTF-to-PDF.csproj", "{50CD2B65-F418-4379-945D-9B81EC63DAFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CC69864A-70D1-4E1C-ACDB-EB8281564061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC69864A-70D1-4E1C-ACDB-EB8281564061}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC69864A-70D1-4E1C-ACDB-EB8281564061}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC69864A-70D1-4E1C-ACDB-EB8281564061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50CD2B65-F418-4379-945D-9B81EC63DAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50CD2B65-F418-4379-945D-9B81EC63DAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50CD2B65-F418-4379-945D-9B81EC63DAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50CD2B65-F418-4379-945D-9B81EC63DAFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5359AED4-400F-490A-A18C-7DE20DC30F52}
+		SolutionGuid = {F0C13F44-75CA-40CC-8496-D70FE912F046}
 	EndGlobalSection
 EndGlobal

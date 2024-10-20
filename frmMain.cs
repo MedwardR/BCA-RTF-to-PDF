@@ -1,105 +1,263 @@
+using System.Diagnostics;
+
 namespace BCA_RTF_to_PDF
 {
-    public partial class frmMain : Form
+    public partial class frmMain : Form, IDisposable
     {
-        private CancellationTokenSource? m_UiCts;
+        private Settings m_Settings;
+        private bool m_IsLoaded;
 
         public frmMain()
         {
-            InitializeComponent();
+            try
+            {
+                m_IsLoaded = false;
+                InitializeComponent();
+                LoadCoolShellIcons();
+
+                m_Settings = Settings.Load();
+
+                m_IsLoaded = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
-        #region Input
+        #region Event Handlers
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                tbPath.Text = m_Settings.LastValidPath;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                bool firstTab = tabControl1.SelectedTab == tabPage1;
+                btnLaunch.Visible = firstTab;
+                btnPaste.Visible = firstTab;
+                btnOpen.Visible = firstTab;
+                progressBar2.Visible = !firstTab;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnLaunch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Directory.Exists(tbPath.Text))
+                {
+                    Process.Start(new ProcessStartInfo()
+                    {
+                        FileName = tbPath.Text,
+                        UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnPaste_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tbPath.Text = Clipboard.GetText();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.ShowDialog(this);
-            string path = folderBrowserDialog1.SelectedPath;
-            if (!string.IsNullOrWhiteSpace(path))
+            try
             {
-                tbFolderPath.Text = path;
+                folderBrowserDialog1.ShowDialog(this);
+                if (!string.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
+                {
+                    LoadDirectoryData(folderBrowserDialog1.SelectedPath);
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
-        private async void tbFolderPath_TextChanged(object sender, EventArgs e)
+        private void tbPath_TextChanged(object sender, EventArgs e)
         {
-            string path = tbFolderPath.Text;
-            if (Directory.Exists(path))
+            try
             {
-                if (m_UiCts != null)
-                {
-                    m_UiCts.Cancel();
-                }
-
-                m_UiCts = new();
-                try
-                {
-                    await Task.Run(UpdateInputFilesList, m_UiCts.Token);
-                }
-                catch (OperationCanceledException ex)
-                {
-                    // ignore
-                }
-                finally
-                {
-                    m_UiCts?.Dispose();
-                    m_UiCts = null;
-                }
+                LoadDirectoryData(tbPath.Text);
             }
-            else
+            catch (Exception ex)
             {
-                UpdateFolderInfo(false);
+
             }
         }
 
-        private void UpdateInputFilesList()
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (gbFolderInfo.InvokeRequired)
+            try
             {
-                gbFolderInfo.Invoke(UpdateInputFilesList);
+                m_Settings.Save();
             }
-            else
+            catch (Exception ex)
             {
-                string path = tbFolderPath.Text;
-                if (Directory.Exists(path))
-                {
-                    string[] files = Directory.GetFiles(path);
-                    int fileCount = files.Where((f) => Path.GetExtension(f).Equals(".rtf", StringComparison.CurrentCultureIgnoreCase)).Count();
-                    bool hasTOC = files.Where((f) => Path.GetFileName(f).Equals("_Table_of_Contents.htm", StringComparison.CurrentCultureIgnoreCase)).Count() > 0;
 
-                    UpdateFolderInfo(true, fileCount, hasTOC);
+            }
+        }
+        #endregion
+
+        #region Process Files
+        private void LoadDirectoryData(string dir)
+        {
+            try
+            {
+                if (!m_IsLoaded)
+                {
+                    return;
                 }
                 else
                 {
-                    UpdateFolderInfo(false);
+                    m_IsLoaded = false;
+                }
+
+                tbPath.Text = dir;
+
+                int rtfCount = 0;
+                bool hasTOC = false;
+
+                if (Directory.Exists(dir))
+                {
+                    string[] files = Directory.GetFiles(dir);
+
+                    rtfCount = files.Count(f => Path.GetExtension(f).Trim().ToLower() == ".rtf");
+                    hasTOC = files.Count(f => Path.GetFileName(f).Trim().ToLower() == "_table_of_contents.htm") > 0;
+
+                    if (rtfCount > 0)
+                    {
+                        m_Settings.LastValidPath = dir;
+                        m_Settings.Save();
+                    }
+
+                    btnLaunch.Enabled = true;
+                }
+                else
+                {
+                    btnLaunch.Enabled = false;
+                }
+
+                UpdateFolderDetail(rtfCount, hasTOC);
+                AllowEdit(rtfCount > 0);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                m_IsLoaded = true;
+            }
+        }
+        #endregion
+
+        #region UI Methods
+        private void LoadCoolShellIcons()
+        {
+            try
+            {
+                btnLaunch.Image = ShellIcons.CurvedUpArrow?.ToBitmap();
+                btnPaste.Image = ShellIcons.Clipboard?.ToBitmap();
+                btnOpen.Image = ShellIcons.OpenFolder?.ToBitmap();
+                btnProcessFiles.Image = ShellIcons.RunArrow?.ToBitmap();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void UpdateFolderDetail(int rtfCount, bool hasTOC)
+        {
+            try
+            {
+                if (lblFolderDtl.InvokeRequired)
+                {
+                    lblFolderDtl.Invoke(() => UpdateFolderDetail(rtfCount, hasTOC));
+                }
+                else
+                {
+                    lblFolderDtl.Visible = rtfCount > 0 || hasTOC;
+                    if (lblFolderDtl.Visible)
+                    {
+                        HashSet<string> tokens = [];
+                        if (rtfCount > 0)
+                        {
+                            tokens.Add(rtfCount + " RTF files");
+                        }
+                        if (hasTOC)
+                        {
+                            tokens.Add("table of contents");
+                        }
+                        lblFolderDtl.Text = "Contains " + string.Join(" and ", tokens.Where(t => !string.IsNullOrWhiteSpace(t)));
+                    }
                 }
             }
-        }
+            catch (Exception ex)
+            {
 
-        private void UpdateFolderInfo(bool folderExists, int fileCount = 0, bool hasTOC = false)
-        {
-            if (gbFolderInfo.InvokeRequired)
-            {
-                gbFolderInfo.Invoke(UpdateInputFilesList);
-            }
-            else
-            {
-                lbFileCount.Visible = folderExists;
-                lbFileCount.Text = $"Contains {fileCount} RTF files";
-                lbHasTOC.Visible = folderExists && hasTOC;
             }
         }
 
-        private void btnProcessFiles_Click(object sender, EventArgs e)
+        private void AllowEdit(bool canEdit)
         {
-            ProcessFiles();
+            try
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(() => AllowEdit(canEdit));
+                }
+                else
+                {
+                    btnProcessFiles.Enabled = canEdit;
+                    progressBar1.Enabled = canEdit;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         #endregion
 
-        #region Output
-        private async void ProcessFiles()
+        void IDisposable.Dispose()
         {
-            
+            try
+            {
+                m_Settings.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
-        #endregion
     }
 }

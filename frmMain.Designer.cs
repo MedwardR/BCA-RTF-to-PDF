@@ -28,108 +28,149 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tbFolderPath = new TextBox();
-            btnOpen = new Button();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            llSettings = new LinkLabel();
+            lblFolderDtl = new Label();
+            progressBar1 = new ProgressBar();
             btnProcessFiles = new Button();
-            splitContainer1 = new SplitContainer();
-            gbFolderInfo = new GroupBox();
-            lbHasTOC = new Label();
-            lbFileCount = new Label();
+            tbPath = new TextBox();
+            tabPage2 = new TabPage();
+            lstLog = new ListView();
+            ilLog = new ImageList(components);
+            btnOpen = new Button();
             folderBrowserDialog1 = new FolderBrowserDialog();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.SuspendLayout();
-            gbFolderInfo.SuspendLayout();
+            btnPaste = new Button();
+            btnLaunch = new Button();
+            progressBar2 = new ProgressBar();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
-            // tbFolderPath
+            // tabControl1
             // 
-            tbFolderPath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tbFolderPath.Location = new Point(13, 13);
-            tbFolderPath.Margin = new Padding(4);
-            tbFolderPath.Name = "tbFolderPath";
-            tbFolderPath.Size = new Size(285, 23);
-            tbFolderPath.TabIndex = 1;
-            tbFolderPath.TextChanged += tbFolderPath_TextChanged;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(12, 15);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(387, 134);
+            tabControl1.TabIndex = 0;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(llSettings);
+            tabPage1.Controls.Add(lblFolderDtl);
+            tabPage1.Controls.Add(progressBar1);
+            tabPage1.Controls.Add(btnProcessFiles);
+            tabPage1.Controls.Add(tbPath);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(379, 106);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Process Files";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // llSettings
+            // 
+            llSettings.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            llSettings.AutoSize = true;
+            llSettings.Location = new Point(324, 39);
+            llSettings.Name = "llSettings";
+            llSettings.Size = new Size(49, 15);
+            llSettings.TabIndex = 6;
+            llSettings.TabStop = true;
+            llSettings.Text = "Settings";
+            // 
+            // lblFolderDtl
+            // 
+            lblFolderDtl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblFolderDtl.AutoEllipsis = true;
+            lblFolderDtl.Location = new Point(6, 39);
+            lblFolderDtl.Name = "lblFolderDtl";
+            lblFolderDtl.Size = new Size(312, 15);
+            lblFolderDtl.TabIndex = 5;
+            lblFolderDtl.Text = "Contains 0 RTF files";
+            lblFolderDtl.Visible = false;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            progressBar1.Location = new Point(61, 64);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(312, 36);
+            progressBar1.TabIndex = 4;
+            // 
+            // btnProcessFiles
+            // 
+            btnProcessFiles.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnProcessFiles.Location = new Point(6, 64);
+            btnProcessFiles.Name = "btnProcessFiles";
+            btnProcessFiles.Size = new Size(49, 36);
+            btnProcessFiles.TabIndex = 3;
+            btnProcessFiles.UseVisualStyleBackColor = true;
+            // 
+            // tbPath
+            // 
+            tbPath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbPath.Location = new Point(6, 6);
+            tbPath.Name = "tbPath";
+            tbPath.PlaceholderText = "Folder path";
+            tbPath.Size = new Size(367, 23);
+            tbPath.TabIndex = 0;
+            tbPath.TextChanged += tbPath_TextChanged;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(lstLog);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(379, 106);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Details";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lstLog
+            // 
+            lstLog.BackColor = Color.FromArgb(249, 249, 249);
+            lstLog.BorderStyle = BorderStyle.None;
+            lstLog.Dock = DockStyle.Fill;
+            lstLog.HideSelection = true;
+            lstLog.LabelWrap = false;
+            lstLog.Location = new Point(3, 3);
+            lstLog.Name = "lstLog";
+            lstLog.ShowGroups = false;
+            lstLog.Size = new Size(373, 100);
+            lstLog.SmallImageList = ilLog;
+            lstLog.TabIndex = 0;
+            lstLog.UseCompatibleStateImageBehavior = false;
+            lstLog.View = View.List;
+            // 
+            // ilLog
+            // 
+            ilLog.ColorDepth = ColorDepth.Depth4Bit;
+            ilLog.ImageStream = (ImageListStreamer)resources.GetObject("ilLog.ImageStream");
+            ilLog.TransparentColor = Color.Transparent;
+            ilLog.Images.SetKeyName(0, "info.png");
+            ilLog.Images.SetKeyName(1, "warning.png");
+            ilLog.Images.SetKeyName(2, "error.png");
             // 
             // btnOpen
             // 
             btnOpen.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnOpen.FlatStyle = FlatStyle.System;
-            btnOpen.Location = new Point(306, 13);
-            btnOpen.Margin = new Padding(4);
+            btnOpen.Location = new Point(359, 7);
             btnOpen.Name = "btnOpen";
-            btnOpen.Size = new Size(86, 24);
-            btnOpen.TabIndex = 2;
-            btnOpen.Text = "Open Folder";
+            btnOpen.Size = new Size(40, 26);
+            btnOpen.TabIndex = 1;
             btnOpen.UseVisualStyleBackColor = true;
             btnOpen.Click += btnOpen_Click;
-            // 
-            // btnProcessFiles
-            // 
-            btnProcessFiles.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnProcessFiles.FlatStyle = FlatStyle.System;
-            btnProcessFiles.Location = new Point(13, 138);
-            btnProcessFiles.Margin = new Padding(4);
-            btnProcessFiles.Name = "btnProcessFiles";
-            btnProcessFiles.Size = new Size(379, 50);
-            btnProcessFiles.TabIndex = 5;
-            btnProcessFiles.Text = "Process Files";
-            btnProcessFiles.UseVisualStyleBackColor = true;
-            btnProcessFiles.Click += this.btnProcessFiles_Click;
-            // 
-            // splitContainer1
-            // 
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(0, 0);
-            splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(gbFolderInfo);
-            splitContainer1.Panel1.Controls.Add(btnProcessFiles);
-            splitContainer1.Panel1.Controls.Add(tbFolderPath);
-            splitContainer1.Panel1.Controls.Add(btnOpen);
-            splitContainer1.Panel1.Padding = new Padding(0, 0, 4, 0);
-            splitContainer1.Panel1MinSize = 300;
-            splitContainer1.Size = new Size(800, 400);
-            splitContainer1.SplitterDistance = 400;
-            splitContainer1.SplitterWidth = 1;
-            splitContainer1.TabIndex = 100;
-            // 
-            // gbFolderInfo
-            // 
-            gbFolderInfo.Controls.Add(lbHasTOC);
-            gbFolderInfo.Controls.Add(lbFileCount);
-            gbFolderInfo.FlatStyle = FlatStyle.System;
-            gbFolderInfo.Location = new Point(13, 43);
-            gbFolderInfo.Name = "gbFolderInfo";
-            gbFolderInfo.Size = new Size(379, 88);
-            gbFolderInfo.TabIndex = 7;
-            gbFolderInfo.TabStop = false;
-            gbFolderInfo.Text = "Folder Information";
-            // 
-            // lbHasTOC
-            // 
-            lbHasTOC.AutoSize = true;
-            lbHasTOC.FlatStyle = FlatStyle.System;
-            lbHasTOC.Location = new Point(9, 55);
-            lbHasTOC.Name = "lbHasTOC";
-            lbHasTOC.Size = new Size(119, 15);
-            lbHasTOC.TabIndex = 2;
-            lbHasTOC.Text = "Has table of contents";
-            lbHasTOC.Visible = false;
-            // 
-            // lbFileCount
-            // 
-            lbFileCount.AutoSize = true;
-            lbFileCount.FlatStyle = FlatStyle.System;
-            lbFileCount.Location = new Point(9, 29);
-            lbFileCount.Name = "lbFileCount";
-            lbFileCount.Size = new Size(108, 15);
-            lbFileCount.TabIndex = 0;
-            lbFileCount.Text = "Contains 0 RTF files";
-            lbFileCount.Visible = false;
             // 
             // folderBrowserDialog1
             // 
@@ -137,32 +178,75 @@
             folderBrowserDialog1.ShowNewFolderButton = false;
             folderBrowserDialog1.UseDescriptionForTitle = true;
             // 
+            // btnPaste
+            // 
+            btnPaste.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnPaste.Location = new Point(313, 7);
+            btnPaste.Name = "btnPaste";
+            btnPaste.Size = new Size(40, 26);
+            btnPaste.TabIndex = 2;
+            btnPaste.UseVisualStyleBackColor = true;
+            btnPaste.Click += btnPaste_Click;
+            // 
+            // btnLaunch
+            // 
+            btnLaunch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnLaunch.Location = new Point(267, 7);
+            btnLaunch.Name = "btnLaunch";
+            btnLaunch.Size = new Size(40, 26);
+            btnLaunch.TabIndex = 3;
+            btnLaunch.UseVisualStyleBackColor = true;
+            btnLaunch.Click += btnLaunch_Click;
+            // 
+            // progressBar2
+            // 
+            progressBar2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            progressBar2.Location = new Point(147, 19);
+            progressBar2.Name = "progressBar2";
+            progressBar2.Size = new Size(250, 13);
+            progressBar2.TabIndex = 6;
+            progressBar2.Visible = false;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 243, 243);
-            ClientSize = new Size(800, 400);
-            Controls.Add(splitContainer1);
+            ClientSize = new Size(411, 161);
+            Controls.Add(progressBar2);
+            Controls.Add(btnLaunch);
+            Controls.Add(btnPaste);
+            Controls.Add(btnOpen);
+            Controls.Add(tabControl1);
+            MinimumSize = new Size(309, 200);
             Name = "frmMain";
+            Padding = new Padding(12, 15, 12, 12);
             Text = "BCA RTF to PDF";
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
-            gbFolderInfo.ResumeLayout(false);
-            gbFolderInfo.PerformLayout();
+            FormClosed += frmMain_FormClosed;
+            Load += frmMain_Load;
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private TextBox tbFolderPath;
+
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
         private Button btnOpen;
+        private TextBox tbPath;
         private Button btnProcessFiles;
-        private SplitContainer splitContainer1;
+        private ProgressBar progressBar1;
         private FolderBrowserDialog folderBrowserDialog1;
-        private GroupBox gbFolderInfo;
-        private Label lbHasTOC;
-        private Label lbFileCount;
+        private Label lblFolderDtl;
+        private ListView lstLog;
+        private ImageList ilLog;
+        private Button btnPaste;
+        private Button btnLaunch;
+        private ProgressBar progressBar2;
+        private LinkLabel llSettings;
     }
 }
